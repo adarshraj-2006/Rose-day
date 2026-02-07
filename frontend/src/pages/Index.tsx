@@ -82,51 +82,54 @@ const Index = () => {
         <EmotionTree username={username || 'Guest'} />
       </main>
 
-      {showLogin && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/20 backdrop-blur-sm">
+      {!username && (
+        <div className="fixed bottom-10 left-1/2 -translate-x-1/2 z-50 w-full max-w-xs px-4">
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 shadow-xl max-w-md w-full"
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            className="bg-white/10 backdrop-blur-lg p-4 rounded-2xl border border-white/20 shadow-2xl"
           >
-            <h1 className="font-display text-2xl text-primary text-center mb-6">Enter Your Name</h1>
-            <form onSubmit={handleLogin} className="space-y-4">
+            <p className="text-[10px] text-white/70 mb-2 text-center">Want to plant a rose? Enter your name:</p>
+            <form onSubmit={handleLogin} className="flex gap-2">
               <input
                 type="text"
                 value={tempName}
                 onChange={(e) => setTempName(e.target.value)}
-                className="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
-                placeholder="How should we call you?"
-                required
+                className="flex-1 bg-white/5 border border-white/20 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:ring-1 focus:ring-primary/50"
+                placeholder="Name..."
               />
-              <div className="flex gap-3">
-                <button
-                  type="button"
-                  onClick={() => setUsername('Guest')}
-                  className="flex-1 bg-white/5 text-foreground rounded-xl py-3 text-sm hover:bg-white/10 transition-colors"
-                >
-                  Just Looking
-                </button>
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className="flex-2 bg-primary text-white rounded-xl py-3 px-6 font-medium hover:bg-primary/90 transition-colors disabled:opacity-50"
-                >
-                  {isLoading ? '...' : 'Enter Garden'}
-                </button>
-              </div>
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="bg-primary text-white rounded-lg px-4 py-2 text-xs font-semibold hover:bg-primary/90 transition-colors"
+              >
+                {isLoading ? '...' : 'Join'}
+              </button>
             </form>
           </motion.div>
         </div>
       )}
 
       <motion.footer
-        className="text-center pb-4 text-[11px] text-muted-foreground relative z-10"
+        className="mt-auto text-center pb-6 md:pb-8 relative z-10 px-4 space-y-2"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2.5, duration: 1 }}
       >
-        Click any branch to plant your anonymous message 💌
+        <p className="text-[11px] text-muted-foreground">
+          Click any branch to plant your anonymous message 💌
+        </p>
+        <div className="text-[10px] text-muted-foreground/60 font-medium">
+          Developed by{' '}
+          <a
+            href="https://www.linkedin.com/in/adarsh-raj123"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary/70 hover:text-primary transition-colors hover:underline underline-offset-2"
+          >
+            Adarsh Raj
+          </a>
+        </div>
       </motion.footer>
     </div>
   );
